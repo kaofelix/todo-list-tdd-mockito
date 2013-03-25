@@ -13,4 +13,8 @@ public class TodoList {
         Todo todo = todoFactory.makeTodo(todoDescription);
         todoRepository.save(todo);
     }
+
+    public String listAll() {
+        return null;
+    }
 }
