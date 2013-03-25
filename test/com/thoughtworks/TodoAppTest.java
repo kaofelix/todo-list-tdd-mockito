@@ -12,6 +12,7 @@ import static org.junit.matchers.JUnitMatchers.containsString;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 public class TodoAppTest {
 
@@ -43,6 +44,22 @@ public class TodoAppTest {
         todoApp.run();
 
         assertThat(out.toString(), containsString("1. Buy milk\n 2. Prepare presentation about mockito"));
+    }
+
+    @Test
+    public void shouldMarkATaskAsDone() throws Exception {
+        TodoApp todoApp = new TodoApp(makeInputStream("done 1"), printStream, todoList);
+        todoApp.run();
+
+        verify(todoList).markAsDone(1);
+    }
+
+    @Test
+    public void shouldMarkAnotherTaskAsDone() throws Exception {
+        TodoApp todoApp = new TodoApp(makeInputStream("done 2"), printStream, todoList);
+        todoApp.run();
+
+        verify(todoList).markAsDone(2);
     }
 
     private BufferedInputStream makeInputStream(String content) {

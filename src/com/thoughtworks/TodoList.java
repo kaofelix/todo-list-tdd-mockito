@@ -17,4 +17,8 @@ public class TodoList {
     public String listAll() {
         return null;
     }
+
+    public void markAsDone(int taskIndex) {
+
+    }
 }
